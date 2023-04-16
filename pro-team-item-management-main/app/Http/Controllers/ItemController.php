@@ -27,7 +27,7 @@ class ItemController extends Controller
         $items = Item
             ::where('items.status', 'active')
             ->select()
-            ->get();
+            ->paginate(5);
 
         return view('item.index', compact('items'));
     }
@@ -42,6 +42,7 @@ class ItemController extends Controller
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:100',
+                'stock' => 'required',
             ]);
 
             // 商品登録
@@ -50,11 +51,78 @@ class ItemController extends Controller
                 'name' => $request->name,
                 'type' => $request->type,
                 'detail' => $request->detail,
+                'stock' => $request->stock,
             ]);
 
             return redirect('/items');
         }
 
         return view('item.add');
+    }
+
+
+    // 検索機能
+    public function item_search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        
+        $query = Item::query();
+        // 文字を入力して検索ボタンを押した場合
+        if(!empty($keyword)) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+        // 空欄で検索ボタンを押した場合
+        } else {
+            // $items = Item::where('items.status', 'active')
+            // ->select()
+            // ->get();
+
+        //return view('item.index', compact('items'));
+        return redirect('/items');
+        }
+
+        $items = $query->paginate(5);
+
+        return view('item.index', compact('items', 'keyword'));
+    }
+
+    //削除機能
+    public function item_destroy($id)
+    {
+        // itemsテーブルから指定のIDのレコード1件を取得
+        $item = Item::find($id);
+        // レコードを削除
+        $item->delete();
+        
+
+        // return view('item.index', compact('items'));
+        return redirect('/items');
+    }
+
+    // 編集画面の表示
+    public function item_showedit($id)
+    {
+        // itemsテーブルから指定のIDのレコード1件を取得
+        $item = Item::find($id);
+
+        return view('item_showedit', compact('item'));
+    }
+
+    // 編集機能
+    public function item_edit(Request $request){
+        
+        //既存のレコードを取得して、編集してから保存する
+        $item = Item::where('id', '=', $request->id)->first();
+        $item->name = $request->name;
+        $item->type = $request->type;
+        $item->detail = $request->detail;
+        $item->stock = $request->stock;
+        $item->save();
+
+        // $items = Item
+        //     ::where('items.status', 'active')
+        //     ->select()
+        //     ->get();
+
+            return redirect('/items');
     }
 }
