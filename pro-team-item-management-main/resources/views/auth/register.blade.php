@@ -16,7 +16,7 @@
 
                             <div class="col-md-6">
                                 <select id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role" autofocus>
-                                    <option>一般会員</option>
+                                    <option>一般ユーザー</option>
                                     <option value="administrator">管理者</option>
                                 </select>
                                 @error('name')
