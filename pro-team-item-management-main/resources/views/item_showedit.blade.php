@@ -24,12 +24,12 @@
                 <div class="col-4"></div>
                 <div class="col-1"><label for="number">種別</label></div>
                 <div class="col-4">
-                    <select class="form-control" type="text" name="type" value="{{$item->type}}">
+                    <select class="form-control" type="text" name="type">
                         <option>種別を選択してください</option>
-                        <option>筆記具</option>
-                        <option>修正用具</option>
-                        <option>綴じ具</option>
-                        <option>接着用具</option>
+                        <option value="筆記具" @if ($item->type == "筆記具") selected @endif>筆記具</option>
+                        <option value="修正用具" @if ($item->type == "修正用具") selected @endif>修正用具</option>
+                        <option value="綴じ具" @if ($item->type == "綴じ具") selected @endif>綴じ具</option>
+                        <option value="接着用具" @if ($item->type == "接着用具") selected @endif>接着用具</option>
                     </select>
                 </div>
                 <div class="col-3"></div>    
