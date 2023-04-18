@@ -6,6 +6,7 @@
 @section('content_header')
     <h1>商品一覧</h1>
     <form action="{{ route('item_search') }}" method="GET">
+    @csrf
         <input type="text" name="keyword" value="" placeholder="商品名を入力">
         <input type="submit" value="検索">
     </form>
