@@ -109,6 +109,15 @@ class ItemController extends Controller
 
     // 編集機能
     public function item_edit(Request $request){
+
+        if ($request->isMethod('post')) {
+            // バリデーション
+            $this->validate($request, [
+                'name' => 'required|max:100',
+                'type' => 'required',
+                'detail' => 'required',
+                'stock' => 'required',
+            ]);
         
         //既存のレコードを取得して、編集してから保存する
         $item = Item::where('id', '=', $request->id)->first();
@@ -124,5 +133,6 @@ class ItemController extends Controller
         //     ->get();
 
             return redirect('/items');
+        }
     }
 }
