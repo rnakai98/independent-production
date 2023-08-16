@@ -50,7 +50,7 @@
             <div class="card-footer">
             <div class="form-group row">
                 <div class="col-5"></div>
-                <div class="col-4"><button type="submit" class="btn btn-secondary">編集</button></div>
+                <div class="col-4"><button type="submit" class="btn btn-secondary">更新</button></div>
                 <div class="col-3"></div>
             </div>
             </div>
