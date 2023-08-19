@@ -1,35 +1,38 @@
-## 商品管理システム
+# 商品管理システム
 
-### 環境構築手順
+## 概要
+このシステムでは商品の在庫管理を行うことができます。
+管理者権限のあるユーザーのみ、商品の登録・編集・削除が行え、商品管理ができます。
+一般ユーザーは閲覧のみ可能となり、現在の商品の状況が確認できるようになっています。
 
-* Gitクローン
-* .env.example をコピーして .env を作成
-* MySQLかPostgreSQLのデータベース作成（名前：item_management）  
-  ローカルでMAMPを使用しているのであれば、MySQL推奨
-* .env にデータベース接続情報追加
+## 主な機能
+- ログイン・ログアウト機能
+- ユーザーの新規登録(管理者・一般ユーザーの選択可)
+- 商品一覧表示
+- 商品一覧ページの切り替え
+- 標品の新規登録・編集・削除
+- 商品検索機能
+
+## 開発環境
 ```
-例）
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=item_management
-DB_USERNAME=root
-DB_PASSWORD=root
+PHP 7.4.33
+MySQL 10.4.27
+Larave 8.83.3
 ```
-* APP_KEY生成
+
+## 設計書
+[設計書ページへ](https://drive.google.com/drive/folders/14AOTs01NKoPs0xMQD94wKyJ10ZvNVC2Y?usp=sharing)
+
+## システム閲覧
+[アプリケーションページへ](https://pro-team-item-management-main.herokuapp.com/login)
+
+### テストアカウント情報
 ```
-$ php artisan key:generate
-```
-* Composerインストール
-```
-$ composer install
-```
-* フロント環境構築
-```
-$ npm install
-$ npm run dev
-```
-* マイグレーション
-```
-$ php artisan migrate
+【管理者】
+メールアドレス：nakai2@nakai.jp
+パスワード：nakai21992
+
+【一般ユーザー】
+メールアドレス：rnakai@nakai.jp
+パスワード：nakai1992
 ```
